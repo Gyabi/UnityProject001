@@ -50,6 +50,7 @@ public class ObjectSelector : MonoBehaviour
             GameObject cubeUI = Instantiate(cubeList[i], cubeUIParent.transform);
 
             // rectの情報をコピー
+            cubeUI.AddComponent<RectTransform>();
             RectTransform rectTransform = cubeUI.GetComponent<RectTransform>();
             RectTransform originalrectTransform = whitecubeUI.GetComponent<RectTransform>();
             rectTransform.SetParent(cubeUIParent.transform);

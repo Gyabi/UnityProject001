@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     {
         // キューブオブジェクトを選択UIに反映
         _objectSelector.SetCubeList(ref _cubeList);
+
+        // キューブオブジェクトをcube管理クラスに反映
+        CubeManager.Instance.SetCubeList(ref _cubeList);
     }
     void Start()
     {
@@ -44,7 +47,6 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentCube(int value)
     {
-        _currentCubeIndex = value;
-        Debug.Log(_currentCubeIndex);
+        CubeManager.Instance.SetCurrentCube(value);
     }
 }
