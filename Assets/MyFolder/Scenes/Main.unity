@@ -302,8 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dddbd08ba43de5418de9cc3cf77276c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeList:
-  - {fileID: 3037288915591482353, guid: 5f83a5c75d2614246a42561cbe08a083, type: 3}
+  _cubeList: []
+  _objectSelector: {fileID: 677038286}
 --- !u!4 &73055118
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,6 +1435,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b3bc79711d6584691e890ce42d1052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cubeUIList:
+  - {fileID: 2140683729}
+  - {fileID: 759159506}
+  - {fileID: 498825196}
+  - {fileID: 712350263}
+  - {fileID: 1645444413}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

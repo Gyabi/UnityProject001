@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class ObjectSelector : MonoBehaviour
 {
-    private int _currentValue = 0;
+    [SerializeField, Header("CubeUI一覧")]
+    private List<GameObject> cubeUIList = new List<GameObject>();
+
+    [SerializeField, Header("CubeUIを格納する親オブジェクト")]
+    private GameObject cubeUIParent = null;
+
+    private List<GameObject> cubeList = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +26,48 @@ public class ObjectSelector : MonoBehaviour
 
     public void SetCurrentCube(int value)
     {
-        _currentValue = value;
-        // Debug.Log(_currentValue);
+        GameManager.Instance.SetCurrentCube(value);
+        
+    }
+
+    public void SetCubeList(ref List<GameObject> list)
+    {
+        this.cubeList = list;
+        MakeGUi();
+    }
+
+
+    private void MakeGUi()
+    {   
+        Debug.Log("MakeGUI");
+        // 事前に設定しているUiの元データを書き換える為の配列
+        List<GameObject> tempList = new List<GameObject>();
+        for(int i=0; i<cubeList.Count; i++)
+        {
+            // 対応するUIオブジェクトを取得
+            GameObject whitecubeUI = cubeUIList[i];
+            // インスタンス化
+            GameObject cubeUI = Instantiate(cubeList[i], cubeUIParent.transform);
+
+            // rectの情報をコピー
+            RectTransform rectTransform = cubeUI.GetComponent<RectTransform>();
+            RectTransform originalrectTransform = whitecubeUI.GetComponent<RectTransform>();
+            rectTransform.SetParent(cubeUIParent.transform);
+            rectTransform.localPosition    = originalrectTransform.localPosition;
+            rectTransform.localRotation    = originalrectTransform.localRotation;
+            rectTransform.localScale       = originalrectTransform.localScale;
+            rectTransform.pivot            = originalrectTransform.pivot;
+            rectTransform.anchorMin        = originalrectTransform.anchorMin;
+            rectTransform.anchorMax        = originalrectTransform.anchorMax;
+            rectTransform.anchoredPosition = originalrectTransform.anchoredPosition;
+            rectTransform.sizeDelta        = originalrectTransform.sizeDelta;
+            cubeUI.name = cubeUIList[i].name;
+            cubeUI.layer = cubeUIList[i].layer;
+            tempList.Add(cubeUI);
+            // 書き換えたデータを削除
+            Destroy(whitecubeUI);
+        }
+        // リスト更新
+        cubeUIList = tempList;
     }
 }
